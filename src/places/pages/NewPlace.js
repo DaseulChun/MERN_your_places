@@ -6,7 +6,7 @@ import {
   VALIDATOR_REQUIRE,
   VALIDATOR_MINLENGTH
 } from "../../shared/util/validators";
-import { useForm } from '../../shared/hooks/form-hook';
+import { useForm } from "../../shared/hooks/form-hook";
 import "./PlaceForm.css";
 
 const NewPlace = () => {
@@ -24,7 +24,7 @@ const NewPlace = () => {
         value: "",
         isValid: false
       }
-    }, 
+    },
     false
   );
 
