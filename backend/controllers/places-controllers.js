@@ -1,5 +1,4 @@
 // 👍 Only focused on the middleware functions
-const uuid = require("uuid/v4");
 const { validationResult } = require("express-validator");
 const mongoose = require("mongoose");
 
@@ -7,20 +6,6 @@ const HttpError = require("../models/http-error");
 const getCoordsForAddress = require("../util/location");
 const Place = require("../models/place");
 const User = require("../models/user");
-
-let DUMMY_PLACES = [
-  {
-    id: "p1",
-    title: "Empire State Building",
-    description: "One of the most famous sky scrapers in the world!",
-    location: {
-      lat: 40.7484405,
-      lng: -73.9856644
-    },
-    address: "20 W 34th St, New York, NY 10001",
-    creator: "u1"
-  }
-];
 
 const getPlaceById = async (req, res, next) => {
   const placeId = req.params.pid;
@@ -45,9 +30,6 @@ const getPlaceById = async (req, res, next) => {
   }
   res.json({ place: place.toObject({ getters: true }) });
 };
-
-// function getPlaceId() { ... }
-// const getPlaceById = function() { ... }
 
 const getPlacesByUserId = async (req, res, next) => {
   const userId = req.params.uid;
@@ -117,15 +99,10 @@ const createPlace = async (req, res, next) => {
   try {
     const sess = await mongoose.startSession();
 
-    // Start a transaction on current session
     sess.startTransaction();
-    // Transaction 1: create Place and save to DB with passing one argument
     await createdPlace.save({ session: sess });
-    // Transaction 2: add createdPlace Id to the related user
     user.places.push(createdPlace);
     await user.save({ session: sess });
-
-    // ONLY IF those 2 transactions were successful, transaction will be committed.
     await sess.commitTransaction();
   } catch (err) {
     const error = new HttpError(
