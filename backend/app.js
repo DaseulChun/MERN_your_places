@@ -34,7 +34,8 @@ mongoose
     `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0-glomg.mongodb.net/places?retryWrites=true&w=majority`,
     {
       useNewUrlParser: true,
-      useUnifiedTopology: true
+      useUnifiedTopology: true,
+      useCreateIndex: true
     }
   )
   .then(() => {
