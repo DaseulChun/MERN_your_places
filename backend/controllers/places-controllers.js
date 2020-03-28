@@ -1,10 +1,12 @@
 // 👍 Only focused on the middleware functions
 const uuid = require("uuid/v4");
 const { validationResult } = require("express-validator");
+const mongoose = require("mongoose");
 
 const HttpError = require("../models/http-error");
 const getCoordsForAddress = require("../util/location");
 const Place = require("../models/place");
+const User = require("../models/user");
 
 let DUMMY_PLACES = [
   {
@@ -94,8 +96,33 @@ const createPlace = async (req, res, next) => {
     creator
   });
 
+  let user;
   try {
-    await createdPlace.save();
+    user = await User.findById(creator);
+  } catch (err) {
+    console.log(err);
+    const error = new HttpError("Creating place failed, please try again", 500);
+    return next(error);
+  }
+
+  if (!user) {
+    const error = new HttpError("Could not find user for provided id", 404);
+    return next(error);
+  }
+
+  try {
+    const sess = await mongoose.startSession();
+
+    // Start a transaction on current session
+    sess.startTransaction();
+    // Transaction 1: create Place and save to DB with passing one argument
+    await createdPlace.save({ session: sess });
+    // Transaction 2: add createdPlace Id to the related user
+    user.places.push(createdPlace);
+    await user.save({ session: sess });
+
+    // ONLY IF those 2 transactions were successful, transaction will be committed.
+    await sess.commitTransaction();
   } catch (err) {
     const error = new HttpError(
       "Creating place failed, please try again.",
