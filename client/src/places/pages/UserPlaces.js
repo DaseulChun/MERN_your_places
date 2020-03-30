@@ -18,9 +18,7 @@ const UserPlaces = () => {
         const responseData = await sendRequest(
           `http://localhost:5000/api/places/user/${userId}`
         );
-        console.log(responseData.places);
         setLoadedPlaces(responseData.places);
-        console.log(loadedPlaces);
       } catch (err) {}
     };
     fetchPlaces();
