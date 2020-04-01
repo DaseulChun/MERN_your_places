@@ -50,7 +50,7 @@ const signUp = async (req, res, next) => {
   const createdUser = new User({
     name,
     email,
-    image: "https://randomuser.me/api/portraits/men/84.jpg",
+    image: req.file.path,
     password,
     places: []
   });
