@@ -126,6 +126,7 @@ const updatePlace = async (req, res, next) => {
   const { title, description } = req.body;
   const placeId = req.params.pid;
 
+  console.log(req.body);
   let place;
   try {
     place = await Place.findById(placeId);
@@ -134,6 +135,11 @@ const updatePlace = async (req, res, next) => {
       "Something went wrong, could not update place.",
       500
     );
+    return next(error);
+  }
+
+  if (place.creator.toString() !== req.userData.userId) {
+    const error = new HttpError("You are not allowed to edit this place.", 401);
     return next(error);
   }
 
