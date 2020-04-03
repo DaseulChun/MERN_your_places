@@ -126,7 +126,6 @@ const updatePlace = async (req, res, next) => {
   const { title, description } = req.body;
   const placeId = req.params.pid;
 
-  console.log(req.body);
   let place;
   try {
     place = await Place.findById(placeId);
@@ -178,6 +177,13 @@ const deletePlace = async (req, res, next) => {
     return next(error);
   }
 
+  if (place.creator.id !== req.userData.userId) {
+    const error = new HttpError(
+      "You are not allowed to delete this place.",
+      401
+    );
+    return next(error);
+  }
   const imagePath = place.image;
 
   try {
