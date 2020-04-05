@@ -1,0 +1,11 @@
+Create nodemon.json file and input these: 
+
+{
+  "env": {
+    "DB_USER": "your MongoDB username",
+    "DB_PASSWORD": "your MongoDB user's password",
+    "DB_NAME": "your DB name",
+    "GOOGLE_API_KEY": "your google api key",
+    "JWT_KEY": "your JWT private key"
+  }
+}
