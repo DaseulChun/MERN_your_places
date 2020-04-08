@@ -37,7 +37,7 @@ app.use((req, res, next) => {
 
 app.use((error, req, res, next) => {
   if (req.file) {
-    fs.unlink(req.file.path, err => {
+    fs.unlink(req.file.path, (err) => {
       console.log(err);
     });
   }
@@ -54,12 +54,12 @@ mongoose
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      useCreateIndex: true
+      useCreateIndex: true,
     }
   )
   .then(() => {
-    app.listen(5000);
+    app.listen(process.env.PORT || 5000);
   })
-  .catch(err => {
+  .catch((err) => {
     console.log(err);
   });

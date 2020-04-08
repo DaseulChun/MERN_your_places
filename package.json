@@ -1,0 +1,20 @@
+{
+  "name": "place_finder_mern",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cd backend && npm install && node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DaseulChun/MERN_your_places.git"
+  },
+  "author": "Daseul Chun",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DaseulChun/MERN_your_places/issues"
+  },
+  "homepage": "https://github.com/DaseulChun/MERN_your_places#readme"
+}
