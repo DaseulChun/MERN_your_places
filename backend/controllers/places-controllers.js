@@ -1,8 +1,7 @@
 // 👍 Only focused on the middleware functions
-const fs = require("fs");
-
 const { validationResult } = require("express-validator");
 const mongoose = require("mongoose");
+const s3 = require("../config/s3");
 
 const HttpError = require("../models/http-error");
 const getCoordsForAddress = require("../util/location");
@@ -79,7 +78,7 @@ const createPlace = async (req, res, next) => {
     description,
     address,
     location: coordinates,
-    image: req.file.path,
+    image: req.file.key,
     creator: req.userData.userId
   });
 
@@ -183,7 +182,11 @@ const deletePlace = async (req, res, next) => {
     );
     return next(error);
   }
-  const imagePath = place.image;
+
+  const params = {
+    Bucket: process.env.AWS_BUCKET_NAME,
+    Key: place.image
+  }
 
   try {
     const sess = await mongoose.startSession();
@@ -201,9 +204,11 @@ const deletePlace = async (req, res, next) => {
     return next(error);
   }
 
-  fs.unlink(imagePath, err => {
-    console.log(err);
-  });
+  s3.deleteObject(params, (err, data) => {
+    if (err) {
+      console.log(err, err.stack);
+    }
+  })
 
   res.status(200).json({ message: "Deleted place." });
 };

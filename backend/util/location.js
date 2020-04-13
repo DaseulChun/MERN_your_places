@@ -21,7 +21,6 @@ async function getCoordsForAddress(address) {
     throw error;
   }
 
-  console.log(data);
   const coordinates = data.results[0].geometry.location;
 
   return coordinates;
