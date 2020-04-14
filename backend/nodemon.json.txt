@@ -6,6 +6,9 @@ Create nodemon.json file and input these:
     "DB_PASSWORD": "your MongoDB user's password",
     "DB_NAME": "your DB name",
     "GOOGLE_API_KEY": "your google api key",
-    "JWT_KEY": "your JWT private key"
+    "JWT_KEY": "your JWT private key",
+    "AWS_IAM_USER_KEY": "your AWS IAM user accessKeyId",
+    "AWS_IAM_USER_SECRET": "your AWS IAM user secretAccessKey",
+    "AWS_BUCKET_NAME": "your AWS bucket name"
   }
 }
