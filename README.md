@@ -9,6 +9,7 @@ Your Fav Places is a SNS which you can post your favourite places and share pict
 * MongoDB
 * Heroku/ Firebase/ AWS S3
 * Google API: Maps, Geocoding
+* JWT
 
 ## Setup
 ### Prerequisites
