@@ -34,9 +34,9 @@ npm start // This will open up the browser
 ```
 
 ### Input Your Credentials
-After cloning this project to your computer, create /backend/nodemon.json referred to [/backend/nodemon.json.txt](https://github.com/DaseulChun/MERN_your_places/blob/master/backend/nodemon.json.txt) and input all your credentials accordingly. 
+After cloning this project to your computer, create **/backend/nodemon.json** referred to [/backend/nodemon.json.txt](https://github.com/DaseulChun/MERN_your_places/blob/master/backend/nodemon.json.txt) and input all your credentials accordingly. 
 
-Create /client/.env referred to [/client/.env.text](https://github.com/DaseulChun/MERN_your_places/blob/master/client/.env.text) and input your credentials. Now you will be able to play around with it. 
+Create **/client/.env** referred to [/client/.env.text](https://github.com/DaseulChun/MERN_your_places/blob/master/client/.env.text) and input your credentials. Now you will be able to play around with it. 
 
 ## Features
 * All users can sign up & login
