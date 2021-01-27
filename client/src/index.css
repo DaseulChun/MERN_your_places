@@ -10,7 +10,13 @@ html {
 
 body {
   margin: 0;
-  background: #4d4d4d;
+  background-image: linear-gradient(
+      rgba(0, 0, 0, 0.383),
+      rgba(14, 13, 13, 0.507)
+    ),
+    url('background-image.jpg');
+  background-size: cover;
+  height: calc(100vh - 5rem);
 }
 
 .slide-in-left-enter {
